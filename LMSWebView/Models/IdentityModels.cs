@@ -1,8 +1,9 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using LMSModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace LMSWebView.Models
 {
@@ -18,16 +19,20 @@ namespace LMSWebView.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class LmsDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        public LmsDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public static ApplicationDbContext Create()
+        public static LmsDbContext Create()
         {
-            return new ApplicationDbContext();
+            return new LmsDbContext();
         }
+
+        public DbSet<Course> Courses { get; set; }
+
+        public DbSet<Department> Departments { get; set; }
     }
 }
